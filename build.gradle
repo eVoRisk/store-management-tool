@@ -7,6 +7,10 @@ plugins {
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
+ext {
+    lombok_version = '1.18.30'
+}
+
 jar {
     manifest {
         attributes 'Main-Class': 'com.store.management.tool.StoreManagementToolApplication'
@@ -20,6 +24,8 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    compileOnly "org.projectlombok:lombok:$lombok_version"
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
