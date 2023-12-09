@@ -30,6 +30,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-jackson:$retrofit_version"
 
     compileOnly "org.projectlombok:lombok:$lombok_version"
+    annotationProcessor "org.projectlombok:lombok:$lombok_version"
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

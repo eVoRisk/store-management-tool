@@ -1,21 +1,36 @@
 package com.store.management.tool.config.client;
 
-import com.store.management.tool.exception.ErrorCode;
+import com.store.management.tool.exception.mapper.ExceptionMapper;
 import com.store.management.tool.exception.StoreManagementToolException;
+import com.store.management.tool.util.JsonUtil;
+import okhttp3.ResponseBody;
 import org.jetbrains.annotations.NotNull;
 import retrofit2.Call;
 import retrofit2.CallAdapter;
 import retrofit2.Response;
 
 import java.lang.reflect.Type;
-import java.util.Optional;
 
-public class SynchronousCallAdapter<R> implements CallAdapter<R, Object> {
+import static com.store.management.tool.exception.ErrorCode.INTERNAL_ERROR;
+import static java.util.Optional.of;
+import static java.util.Optional.ofNullable;
+
+public class SynchronousCallAdapter<R, E> implements CallAdapter<R, Object> {
 
     private final Type responseType;
+    private final JsonUtil jsonUtil;
+    private final ExceptionMapper<E> exceptionMapper;
+    private final Class<E> failureClass;
 
-    SynchronousCallAdapter(final Type responseType) {
+
+    public SynchronousCallAdapter(final Type responseType,
+                           final JsonUtil jsonUtil,
+                           final ExceptionMapper<E> exceptionMapper,
+                           final Class<E> failureClass) {
         this.responseType = responseType;
+        this.jsonUtil = jsonUtil;
+        this.exceptionMapper = exceptionMapper;
+        this.failureClass = failureClass;
     }
 
     @NotNull
@@ -35,9 +50,27 @@ public class SynchronousCallAdapter<R> implements CallAdapter<R, Object> {
             throw new StoreManagementToolException(e);
         }
 
-        return Optional.of(response)
+        return of(response)
                 .filter(Response::isSuccessful)
                 .filter(r -> r.body() != null)
-                .orElseThrow(() -> new StoreManagementToolException(ErrorCode.INTERNAL_ERROR));
+                .orElseThrow(() -> mapToException(response));
+    }
+
+    private StoreManagementToolException mapToException(final Response<?> response) {
+        try(final ResponseBody errorBody = response.errorBody()) {
+            return ofNullable(errorBody)
+                    .map(this::getResponseBodyString)
+                    .map(stringErrorBody -> jsonUtil.fromJson(stringErrorBody, failureClass))
+                    .map(exceptionMapper::map)
+                    .orElse(new StoreManagementToolException(INTERNAL_ERROR));
+        }
+    }
+
+    private String getResponseBodyString(final ResponseBody responseBody) {
+        try {
+            return responseBody.string();
+        } catch (final Exception e) {
+            throw new StoreManagementToolException(INTERNAL_ERROR, e);
+        }
     }
 }

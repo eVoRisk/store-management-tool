@@ -2,7 +2,10 @@ package com.store.management.tool.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.store.management.tool.config.client.SynchronousCallAdapterFactory;
+import com.store.management.tool.exception.mapper.FakeStoreExceptionMapper;
+import com.store.management.tool.exception.model.FakeStoreFailure;
 import com.store.management.tool.service.client.FakeStoreApi;
+import com.store.management.tool.util.JsonUtil;
 import okhttp3.OkHttpClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +26,7 @@ public class FakeStoreConfig {
     }
 
     @Bean
-    public FakeStoreApi fakeStoreApi() {
+    public FakeStoreApi fakeStoreApi(final JsonUtil jsonUtil, final FakeStoreExceptionMapper exceptionMapper) {
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .callTimeout(properties.timeout(), TimeUnit.MILLISECONDS)
                 .build();
@@ -32,7 +35,7 @@ public class FakeStoreConfig {
                 .baseUrl(properties.baseUrl())
                 .client(httpClient)
                 .addConverterFactory(JacksonConverterFactory.create(objectMapper))
-                .addCallAdapterFactory(new SynchronousCallAdapterFactory())
+                .addCallAdapterFactory(new SynchronousCallAdapterFactory<>(jsonUtil, exceptionMapper, FakeStoreFailure.class))
                 .build();
 
         return retrofit.create(FakeStoreApi.class);
