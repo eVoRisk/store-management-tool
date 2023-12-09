@@ -7,7 +7,8 @@ import lombok.extern.jackson.Jacksonized;
 @Getter
 @Builder(setterPrefix = "with")
 @Jacksonized
-public class Category {
-    private String id;
-    private String name;
+public class Rating {
+
+    private Long rate;
+    private Integer count;
 }
