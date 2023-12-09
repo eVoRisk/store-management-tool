@@ -10,9 +10,12 @@ import java.math.BigDecimal;
 @Builder(setterPrefix = "with")
 @Jacksonized
 public class Product {
-    private String id;
-    private String name;
+
+    private Integer id;
+    private String title;
     private BigDecimal price;
     private String description;
-    private Category category;
+    private String category;
+    private String image;
+    private Rating rating;
 }

@@ -9,6 +9,7 @@ sourceCompatibility = '17'
 
 ext {
     lombok_version = '1.18.30'
+    retrofit_version = '2.9.0'
 }
 
 jar {
@@ -24,6 +25,8 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-jackson:$retrofit_version"
 
     compileOnly "org.projectlombok:lombok:$lombok_version"
 
