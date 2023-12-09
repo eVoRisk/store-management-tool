@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("fakestore/api/v1")
+@RequestMapping("store/api/v1")
 public class FakeStoreController {
 
     private final FakeStoreService fakeStoreService;
@@ -21,7 +21,7 @@ public class FakeStoreController {
         this.fakeStoreService = fakeStoreService;
     }
 
-    @GetMapping("/products")
+    @GetMapping("fakestore/products")
     public ResponseEntity<List<Product>> retrieveProducts() {
         var response = fakeStoreService.products();
 
@@ -30,7 +30,7 @@ public class FakeStoreController {
                 .body(response);
     }
 
-    @GetMapping("/products/categories")
+    @GetMapping("fakestore/products/categories")
     public ResponseEntity<List<String>> retrieveCategories() {
         var response = fakeStoreService.categories();
 
@@ -39,7 +39,7 @@ public class FakeStoreController {
                 .body(response);
     }
 
-    @GetMapping("/products/category/{categoryName}")
+    @GetMapping("fakestore/products/category/{categoryName}")
     public ResponseEntity<List<Product>> retrieveProductsByCategory(@PathVariable("categoryName") final String categoryName) {
         var response = fakeStoreService.productsByCategory(categoryName);
 
