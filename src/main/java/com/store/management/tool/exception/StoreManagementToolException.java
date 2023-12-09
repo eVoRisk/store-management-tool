@@ -21,6 +21,11 @@ public class StoreManagementToolException extends RuntimeException {
         this.errorCode = INTERNAL_ERROR;
     }
 
+    public StoreManagementToolException(final ErrorCode errorCode, final Throwable cause) {
+        super(errorCode.getMessage(), cause);
+        this.errorCode = errorCode;
+    }
+
     public ErrorCode getErrorCode() {
         return errorCode;
     }
