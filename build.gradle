@@ -10,6 +10,8 @@ sourceCompatibility = '17'
 ext {
     lombok_version = '1.18.30'
     retrofit_version = '2.9.0'
+    logback_classic_version = '1.4.8'
+    logstash_encoder_version = '7.4'
 }
 
 jar {
@@ -28,6 +30,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-jackson:$retrofit_version"
+    implementation "ch.qos.logback:logback-classic:$logback_classic_version"
+    implementation "net.logstash.logback:logstash-logback-encoder:$logstash_encoder_version"
 
     compileOnly "org.projectlombok:lombok:$lombok_version"
     annotationProcessor "org.projectlombok:lombok:$lombok_version"
