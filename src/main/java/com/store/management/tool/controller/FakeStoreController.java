@@ -1,6 +1,6 @@
 package com.store.management.tool.controller;
 
-import com.store.management.tool.model.Product;
+import com.store.management.tool.model.fakestore.Product;
 import com.store.management.tool.service.FakeStoreService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,21 +1,37 @@
 package com.store.management.tool.model;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.extern.jackson.Jacksonized;
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
-@Getter
-@Builder(setterPrefix = "with")
-@Jacksonized
+@Data
+@NoArgsConstructor
+@Entity
+@Table(name = "products")
 public class Product {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String title;
-    private BigDecimal price;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "description")
     private String description;
-    private String category;
-    private String image;
-    private Rating rating;
+
+    @Column(name = "price")
+    private BigDecimal price;
+
+    @Column(name = "stock")
+    private Integer stock;
+
+    @ManyToOne
+    private Category category;
+
+    @OneToMany
+    private List<ProductComment> productComment;
 }
