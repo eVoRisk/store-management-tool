@@ -1,7 +1,7 @@
 package com.store.management.tool.service.client;
 
 import com.store.management.tool.config.FakeStoreConfigProperties;
-import com.store.management.tool.model.Product;
+import com.store.management.tool.model.fakestore.Product;
 import retrofit2.Response;
 import retrofit2.http.GET;
 import retrofit2.http.Path;

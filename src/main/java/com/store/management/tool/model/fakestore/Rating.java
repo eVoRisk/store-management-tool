@@ -1,4 +1,4 @@
-package com.store.management.tool.model;
+package com.store.management.tool.model.fakestore;
 
 import lombok.Builder;
 import lombok.Getter;

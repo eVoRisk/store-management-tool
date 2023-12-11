@@ -1,6 +1,6 @@
 package com.store.management.tool.observer.logging;
 
-import com.store.management.tool.model.Product;
+import com.store.management.tool.model.fakestore.Product;
 import com.store.management.tool.observer.ProcessingObserver;
 import okhttp3.Request;
 import org.springframework.stereotype.Component;

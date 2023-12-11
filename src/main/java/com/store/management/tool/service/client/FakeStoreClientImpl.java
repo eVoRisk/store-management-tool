@@ -1,6 +1,6 @@
 package com.store.management.tool.service.client;
 
-import com.store.management.tool.model.Product;
+import com.store.management.tool.model.fakestore.Product;
 import org.springframework.stereotype.Service;
 import retrofit2.Response;
 
