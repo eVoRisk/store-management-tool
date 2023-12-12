@@ -3,6 +3,7 @@ package com.store.management.tool.config.client;
 import com.store.management.tool.exception.mapper.ExceptionMapper;
 import com.store.management.tool.exception.StoreManagementToolException;
 import com.store.management.tool.util.JsonUtil;
+import lombok.RequiredArgsConstructor;
 import okhttp3.ResponseBody;
 import org.jetbrains.annotations.NotNull;
 import retrofit2.Call;
@@ -15,23 +16,13 @@ import static com.store.management.tool.exception.ErrorCode.INTERNAL_ERROR;
 import static java.util.Optional.of;
 import static java.util.Optional.ofNullable;
 
+@RequiredArgsConstructor
 public class SynchronousCallAdapter<R, E> implements CallAdapter<R, Object> {
 
     private final Type responseType;
     private final JsonUtil jsonUtil;
     private final ExceptionMapper<E> exceptionMapper;
     private final Class<E> failureClass;
-
-
-    public SynchronousCallAdapter(final Type responseType,
-                           final JsonUtil jsonUtil,
-                           final ExceptionMapper<E> exceptionMapper,
-                           final Class<E> failureClass) {
-        this.responseType = responseType;
-        this.jsonUtil = jsonUtil;
-        this.exceptionMapper = exceptionMapper;
-        this.failureClass = failureClass;
-    }
 
     @NotNull
     @Override

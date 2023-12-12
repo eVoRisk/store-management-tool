@@ -1,5 +1,8 @@
 package com.store.management.tool.exception;
 
+import lombok.Getter;
+
+@Getter
 public enum ErrorCode {
 
     INTERNAL_ERROR("Internal error");
@@ -8,9 +11,5 @@ public enum ErrorCode {
 
     ErrorCode(final String message) {
         this.message = message;
-    }
-
-    public String getMessage() {
-        return message;
     }
 }

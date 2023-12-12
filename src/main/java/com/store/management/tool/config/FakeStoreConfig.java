@@ -6,6 +6,7 @@ import com.store.management.tool.exception.mapper.FakeStoreExceptionMapper;
 import com.store.management.tool.exception.model.FakeStoreFailure;
 import com.store.management.tool.service.client.FakeStoreApi;
 import com.store.management.tool.util.JsonUtil;
+import lombok.RequiredArgsConstructor;
 import okhttp3.OkHttpClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,16 +15,12 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 
 import java.util.concurrent.TimeUnit;
 
+@RequiredArgsConstructor
 @Configuration
 public class FakeStoreConfig {
 
     private final FakeStoreConfigProperties properties;
     private final ObjectMapper objectMapper;
-
-    public FakeStoreConfig(final FakeStoreConfigProperties properties, final ObjectMapper objectMapper) {
-        this.properties = properties;
-        this.objectMapper = objectMapper;
-    }
 
     @Bean
     public FakeStoreApi fakeStoreApi(final JsonUtil jsonUtil, final FakeStoreExceptionMapper exceptionMapper) {

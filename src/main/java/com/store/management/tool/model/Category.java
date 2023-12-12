@@ -1,5 +1,6 @@
 package com.store.management.tool.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,5 +21,6 @@ public class Category {
     private String name;
 
     @OneToMany
+    @JsonIgnore
     private List<Product> product;
 }

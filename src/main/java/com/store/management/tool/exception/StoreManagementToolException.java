@@ -1,7 +1,10 @@
 package com.store.management.tool.exception;
 
+import lombok.Getter;
+
 import static com.store.management.tool.exception.ErrorCode.*;
 
+@Getter
 public class StoreManagementToolException extends RuntimeException {
 
     private final ErrorCode errorCode;
@@ -24,9 +27,5 @@ public class StoreManagementToolException extends RuntimeException {
     public StoreManagementToolException(final ErrorCode errorCode, final Throwable cause) {
         super(errorCode.getMessage(), cause);
         this.errorCode = errorCode;
-    }
-
-    public ErrorCode getErrorCode() {
-        return errorCode;
     }
 }

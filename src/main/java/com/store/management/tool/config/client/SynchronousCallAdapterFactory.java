@@ -2,6 +2,7 @@ package com.store.management.tool.config.client;
 
 import com.store.management.tool.exception.mapper.ExceptionMapper;
 import com.store.management.tool.util.JsonUtil;
+import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import retrofit2.Call;
 import retrofit2.CallAdapter;
@@ -12,19 +13,12 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
+@RequiredArgsConstructor
 public class SynchronousCallAdapterFactory<E> extends CallAdapter.Factory {
 
     private final JsonUtil jsonUtil;
     private final ExceptionMapper<E> exceptionMapper;
     private final Class<E> failureClass;
-
-    public SynchronousCallAdapterFactory(final JsonUtil jsonUtil,
-                                         final ExceptionMapper<E> exceptionMapper,
-                                         final Class<E> failureClass) {
-        this.jsonUtil = jsonUtil;
-        this.exceptionMapper = exceptionMapper;
-        this.failureClass = failureClass;
-    }
 
     @Override
     public CallAdapter<?, ?> get(@NotNull final Type returnType,
