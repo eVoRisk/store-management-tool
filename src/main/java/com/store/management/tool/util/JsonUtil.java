@@ -2,16 +2,14 @@ package com.store.management.tool.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.store.management.tool.exception.JsonException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+@RequiredArgsConstructor
 @Component
 public class JsonUtil {
 
     private final ObjectMapper objectMapper;
-
-    public JsonUtil(final ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
-    }
 
     public String toJson(final Object value) {
         try {

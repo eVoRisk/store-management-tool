@@ -1,6 +1,8 @@
 package com.store.management.tool.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -29,9 +31,11 @@ public class Product {
     @Column(name = "stock")
     private Integer stock;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
     private Category category;
 
     @OneToMany
+    @JsonIgnore
     private List<ProductComment> productComment;
 }

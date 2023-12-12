@@ -1,5 +1,6 @@
 package com.store.management.tool.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,5 +27,6 @@ public class User {
     private String email;
 
     @OneToMany
+    @JsonIgnore
     private List<ProductComment> productComment;
 }
