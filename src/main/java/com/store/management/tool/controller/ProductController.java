@@ -3,6 +3,7 @@ package com.store.management.tool.controller;
 import com.store.management.tool.dto.ProductDto;
 import com.store.management.tool.model.Product;
 import com.store.management.tool.service.ProductService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping("/product/add")
-    public ResponseEntity<ProductDto> addProduct(@RequestBody final ProductDto productDto) {
+    public ResponseEntity<ProductDto> addProduct(@RequestBody @Valid final ProductDto productDto) {
         var response = productService.add(productDto);
 
         return ResponseEntity
@@ -44,7 +45,7 @@ public class ProductController {
     }
 
     @PutMapping("/product/{id}")
-    public ResponseEntity<ProductDto> updateProduct(@RequestBody final ProductDto productDto, @PathVariable final Integer id) {
+    public ResponseEntity<ProductDto> updateProduct(@RequestBody @Valid final ProductDto productDto, @PathVariable final Integer id) {
         productService.update(productDto, id);
 
         return ResponseEntity

@@ -2,8 +2,8 @@ package com.store.management.tool.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.store.management.tool.config.client.SynchronousCallAdapterFactory;
+import com.store.management.tool.exception.FakeStoreFailure;
 import com.store.management.tool.exception.mapper.FakeStoreExceptionMapper;
-import com.store.management.tool.exception.model.FakeStoreFailure;
 import com.store.management.tool.service.client.FakeStoreApi;
 import com.store.management.tool.util.JsonUtil;
 import lombok.RequiredArgsConstructor;
