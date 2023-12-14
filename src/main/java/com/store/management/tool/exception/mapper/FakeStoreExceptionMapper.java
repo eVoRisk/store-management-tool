@@ -1,7 +1,7 @@
 package com.store.management.tool.exception.mapper;
 
+import com.store.management.tool.exception.FakeStoreFailure;
 import com.store.management.tool.exception.StoreManagementToolException;
-import com.store.management.tool.exception.model.FakeStoreFailure;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -9,6 +9,6 @@ public class FakeStoreExceptionMapper implements ExceptionMapper<FakeStoreFailur
 
     @Override
     public StoreManagementToolException map(final FakeStoreFailure failure) {
-        return new StoreManagementToolException(failure.getReason());
+        return new StoreManagementToolException(failure.reason());
     }
 }
