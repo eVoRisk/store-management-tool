@@ -1,6 +1,7 @@
 package com.store.management.tool.service;
 
-import com.store.management.tool.dto.CategoryDto;
+import com.store.management.tool.dto.request.CategoryDtoRequest;
+import com.store.management.tool.dto.response.CategoryDtoResponse;
 import com.store.management.tool.exception.NotFoundException;
 import com.store.management.tool.model.Category;
 import com.store.management.tool.repository.CategoryRepository;
@@ -20,27 +21,30 @@ public class CategoryServiceImpl implements CategoryService {
     private final ModelMapper modelMapper;
 
     @Override
-    public CategoryDto add(CategoryDto categoryDto) {
-        categoryRepository.save(modelMapper.map(categoryDto, Category.class));
+    public CategoryDtoResponse add(CategoryDtoRequest categoryDtoRequest) {
+        var category = categoryRepository.save(modelMapper.map(categoryDtoRequest, Category.class));
 
-        return categoryDto;
+        return modelMapper.map(category, CategoryDtoResponse.class);
     }
 
     @Override
-    public Category getById(Integer id) {
-        return categoryRepository.findById(id)
+    public CategoryDtoResponse getById(Integer id) {
+        var category = categoryRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(format("Category with id: %s not found", id)));
+
+        return modelMapper.map(category, CategoryDtoResponse.class);
     }
 
     @Override
-    public List<Category> getAll() {
-        return categoryRepository.findAll();
+    public List<CategoryDtoResponse> getAll() {
+        return categoryRepository.findAll().stream()
+                .map(category -> modelMapper.map(category, CategoryDtoResponse.class)).toList();
     }
 
     @Override
-    public void update(CategoryDto categoryDto, Integer id) {
+    public void update(CategoryDtoRequest categoryDtoRequest, Integer id) {
         Optional<Category> category = categoryRepository.findById(id);
-        category.ifPresent(value -> modelMapper.map(categoryDto, value));
+        category.ifPresent(value -> modelMapper.map(categoryDtoRequest, value));
 
         categoryRepository.save(category
                 .orElseThrow(() -> new NotFoundException(format("Category with id: %s not found", id))));

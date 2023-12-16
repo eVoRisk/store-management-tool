@@ -1,6 +1,6 @@
 package com.store.management.tool.observer.logging;
 
-import com.store.management.tool.model.fakestore.Product;
+import com.store.management.tool.dto.fakestore.ProductDto;
 import com.store.management.tool.observer.ProcessingObserver;
 import lombok.RequiredArgsConstructor;
 import okhttp3.Request;
@@ -15,7 +15,7 @@ public class ProcessingLoggerProvider {
     private final ProductProcessingLogger productProcessingLogger;
     private final CategoryProcessingLogger categoryProcessingLogger;
 
-    public ProcessingObserver<Request, List<Product>> productLogger() {
+    public ProcessingObserver<Request, List<ProductDto>> productLogger() {
         return this.productProcessingLogger;
     }
 

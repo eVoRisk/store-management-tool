@@ -1,4 +1,4 @@
-package com.store.management.tool.model.fakestore;
+package com.store.management.tool.dto.fakestore;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Getter
 @Builder(setterPrefix = "with")
 @Jacksonized
-public class Product {
+public class ProductDto {
 
     private Integer id;
     private String title;
@@ -17,5 +17,5 @@ public class Product {
     private String description;
     private String category;
     private String image;
-    private Rating rating;
+    private RatingDto ratingDto;
 }

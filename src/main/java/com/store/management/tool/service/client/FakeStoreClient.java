@@ -1,14 +1,14 @@
 package com.store.management.tool.service.client;
 
-import com.store.management.tool.model.fakestore.Product;
+import com.store.management.tool.dto.fakestore.ProductDto;
 
 import java.util.List;
 
 public interface FakeStoreClient {
 
-    List<Product> products();
+    List<ProductDto> products();
 
     List<String> categories();
 
-    List<Product> productsByCategory(final String categoryName);
+    List<ProductDto> productsByCategory(final String categoryName);
 }

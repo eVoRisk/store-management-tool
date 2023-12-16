@@ -1,13 +1,13 @@
 package com.store.management.tool.observer.logging;
 
-import com.store.management.tool.model.fakestore.Product;
+import com.store.management.tool.dto.fakestore.ProductDto;
 import okhttp3.Request;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-public class ProductProcessingLogger implements LoggerObserver<Request, List<Product>> {
+public class ProductProcessingLogger implements LoggerObserver<Request, List<ProductDto>> {
 
     @Override
     public String getSuccessMessage() {
@@ -25,7 +25,7 @@ public class ProductProcessingLogger implements LoggerObserver<Request, List<Pro
     }
 
     @Override
-    public Object[] getStructuredArgumentsResponse(final List<Product> response) {
+    public Object[] getStructuredArgumentsResponse(final List<ProductDto> response) {
         return new Object[0];
     }
 }

@@ -1,8 +1,9 @@
 package com.store.management.tool.controller;
 
-import com.store.management.tool.dto.ProductCommentDto;
-import com.store.management.tool.model.ProductComment;
+import com.store.management.tool.dto.request.ProductCommentDtoRequest;
+import com.store.management.tool.dto.response.ProductCommentDtoResponse;
 import com.store.management.tool.service.ProductCommentService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +19,8 @@ public class ProductCommentController {
     private final ProductCommentService productCommentService;
 
     @PostMapping("/productcomment/add")
-    public ResponseEntity<ProductCommentDto> addProductComment(@RequestBody final ProductCommentDto productCommentDto) {
-        var response = productCommentService.add(productCommentDto);
+    public ResponseEntity<ProductCommentDtoResponse> addProductComment(@RequestBody @Valid final ProductCommentDtoRequest productCommentDtoRequest) {
+        var response = productCommentService.add(productCommentDtoRequest);
 
         return ResponseEntity
                 .ok()
@@ -27,7 +28,7 @@ public class ProductCommentController {
     }
 
     @GetMapping("/productcomment/{id}")
-    public ResponseEntity<ProductComment> retrieveProductCommentById(@PathVariable final Integer id) {
+    public ResponseEntity<ProductCommentDtoResponse> retrieveProductCommentById(@PathVariable final Integer id) {
         var response = productCommentService.getById(id);
 
         return ResponseEntity
@@ -36,7 +37,7 @@ public class ProductCommentController {
     }
 
     @GetMapping("/productcomments")
-    public ResponseEntity<List<ProductComment>> retrieveProductComments() {
+    public ResponseEntity<List<ProductCommentDtoResponse>> retrieveProductComments() {
         var response = productCommentService.getAll();
 
         return ResponseEntity
@@ -45,12 +46,12 @@ public class ProductCommentController {
     }
 
     @PutMapping("/productcomment/{id}")
-    public ResponseEntity<ProductCommentDto> updateProductComment(@RequestBody final ProductCommentDto productCommentDto, @PathVariable final Integer id) {
-        productCommentService.update(productCommentDto, id);
+    public ResponseEntity<ProductCommentDtoRequest> updateProductComment(@RequestBody @Valid final ProductCommentDtoRequest productCommentDtoRequest, @PathVariable final Integer id) {
+        productCommentService.update(productCommentDtoRequest, id);
 
         return ResponseEntity
                 .ok()
-                .body(productCommentDto);
+                .body(productCommentDtoRequest);
     }
 
     @DeleteMapping("productcomment/{id}")

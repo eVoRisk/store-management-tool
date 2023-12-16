@@ -20,15 +20,12 @@ public class ProductComment {
     @Column(name = "body")
     private String body;
 
-    @Column(name = "rating")
-    private Integer rating;
-
     @Column(name = "create_date")
     private LocalDateTime createDate;
 
     @ManyToOne
     @JsonIgnore
-    private User user;
+    private Customer customer;
 
     @ManyToOne
     @JsonIgnore

@@ -1,4 +1,4 @@
-package com.store.management.tool.dto;
+package com.store.management.tool.dto.request;
 
 import com.store.management.tool.validation.Required;
 import lombok.Builder;
@@ -10,7 +10,7 @@ import static com.store.management.tool.exception.ErrorCode.MISSING_CATEGORY_NAM
 @Getter
 @Builder(setterPrefix = "with")
 @Jacksonized
-public class CategoryDto {
+public class CategoryDtoRequest {
 
     @Required(errorCode = MISSING_CATEGORY_NAME)
     private String name;
