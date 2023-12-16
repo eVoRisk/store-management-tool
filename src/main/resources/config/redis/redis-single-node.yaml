@@ -1,0 +1,6 @@
+singleServerConfig:
+  address: "redis://localhost:6379"
+  timeout: 3000 # default value in milliseconds
+
+# use JDK's serialization codec
+codec: !<org.redisson.codec.SerializationCodec> {}
