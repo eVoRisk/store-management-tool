@@ -17,7 +17,9 @@ import static java.lang.String.format;
 @RequiredArgsConstructor
 @Service
 public class CategoryServiceImpl implements CategoryService {
+
     private final CategoryRepository categoryRepository;
+
     private final ModelMapper modelMapper;
 
     @Override
