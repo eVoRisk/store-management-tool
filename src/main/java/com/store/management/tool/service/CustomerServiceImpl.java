@@ -2,9 +2,11 @@ package com.store.management.tool.service;
 
 import com.store.management.tool.dto.request.CustomerDtoRequest;
 import com.store.management.tool.dto.response.CustomerDtoResponse;
+import com.store.management.tool.dto.response.ProductCommentDtoResponse;
 import com.store.management.tool.exception.NotFoundException;
 import com.store.management.tool.model.Customer;
 import com.store.management.tool.repository.CustomerRepository;
+import com.store.management.tool.repository.ProductCommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,7 @@ import static java.lang.String.format;
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final ProductCommentRepository productCommentRepository;
     private final ModelMapper modelMapper;
 
     @Override
@@ -40,6 +43,12 @@ public class CustomerServiceImpl implements CustomerService {
     public List<CustomerDtoResponse> getAll() {
         return customerRepository.findAll().stream()
                 .map(customer -> modelMapper.map(customer, CustomerDtoResponse.class)).toList();
+    }
+
+    @Override
+    public List<ProductCommentDtoResponse> getAllComments(Integer id) {
+        return productCommentRepository.findAllByCustomerId(id).stream()
+                .map(product -> modelMapper.map(product, ProductCommentDtoResponse.class)).toList();
     }
 
     @Override

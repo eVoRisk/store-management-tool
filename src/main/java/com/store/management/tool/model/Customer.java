@@ -1,16 +1,17 @@
 package com.store.management.tool.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "costumers")
+@Table(name = "customers")
 public class Customer {
 
     @Id
@@ -23,7 +24,6 @@ public class Customer {
     @Column(name = "email")
     private String email;
 
-    @OneToMany
-    @JsonIgnore
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<ProductComment> productComment;
 }

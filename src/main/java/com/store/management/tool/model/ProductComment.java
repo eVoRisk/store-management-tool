@@ -1,13 +1,14 @@
 package com.store.management.tool.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @Entity
 @Table(name = "product_comments")
@@ -24,10 +25,10 @@ public class ProductComment {
     private LocalDateTime createDate;
 
     @ManyToOne
-    @JsonIgnore
+    @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
     @ManyToOne
-    @JsonIgnore
+    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 }

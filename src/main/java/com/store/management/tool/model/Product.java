@@ -1,15 +1,15 @@
 package com.store.management.tool.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @Entity
 @Table(name = "products")
@@ -31,11 +31,10 @@ public class Product {
     @Column(name = "stock")
     private Integer stock;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
-    @OneToMany
-    @JsonIgnore
-    private List<ProductComment> productComment;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<ProductComment> comments;
 }

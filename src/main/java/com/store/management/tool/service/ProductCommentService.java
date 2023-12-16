@@ -8,11 +8,9 @@ import java.util.List;
 
 public interface ProductCommentService {
 
-    ProductCommentDtoResponse add(ProductCommentDtoRequest productCommentDtoRequest);
+    ProductCommentDtoResponse add(ProductCommentDtoRequest productCommentDtoRequest, Integer productId, Integer customerId);
 
     ProductCommentDtoResponse getById(Integer id);
-
-    List<ProductCommentDtoResponse> getAll();
 
     void update(ProductCommentDtoRequest productCommentDtoRequest, Integer id);
 

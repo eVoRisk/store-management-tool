@@ -1,6 +1,7 @@
 package com.store.management.tool.controller;
 
 import com.store.management.tool.dto.request.ProductDtoRequest;
+import com.store.management.tool.dto.response.ProductCommentDtoResponse;
 import com.store.management.tool.dto.response.ProductDtoResponse;
 import com.store.management.tool.service.ProductService;
 import jakarta.validation.Valid;
@@ -44,13 +45,22 @@ public class ProductController {
                 .body(response);
     }
 
-    @PutMapping("/product/{id}")
-    public ResponseEntity<ProductDtoRequest> updateProduct(@RequestBody @Valid final ProductDtoRequest productDto, @PathVariable final Integer id) {
-        productService.update(productDto, id);
+    @GetMapping("/product/{id}/comments")
+    public ResponseEntity<List<ProductCommentDtoResponse>> retrieveProductComments(@PathVariable final Integer id) {
+        var response = productService.getAllComments(id);
 
         return ResponseEntity
                 .ok()
-                .body(productDto);
+                .body(response);
+    }
+
+    @PutMapping("/product/{id}")
+    public ResponseEntity<ProductDtoRequest> updateProduct(@RequestBody @Valid final ProductDtoRequest productDtoRequest, @PathVariable final Integer id) {
+        productService.update(productDtoRequest, id);
+
+        return ResponseEntity
+                .ok()
+                .body(productDtoRequest);
     }
 
     @DeleteMapping("product/{id}")

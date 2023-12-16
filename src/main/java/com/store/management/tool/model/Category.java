@@ -1,13 +1,14 @@
 package com.store.management.tool.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @Entity
 @Table(name = "categories")
@@ -20,7 +21,6 @@ public class Category {
     @Column(name = "name")
     private String name;
 
-    @OneToMany
-    @JsonIgnore
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<Product> product;
 }

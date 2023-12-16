@@ -2,6 +2,7 @@ package com.store.management.tool.controller;
 
 import com.store.management.tool.dto.request.CustomerDtoRequest;
 import com.store.management.tool.dto.response.CustomerDtoResponse;
+import com.store.management.tool.dto.response.ProductCommentDtoResponse;
 import com.store.management.tool.service.CustomerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +39,15 @@ public class CustomerController {
     @GetMapping("/customers")
     public ResponseEntity<List<CustomerDtoResponse>> retrieveCustomers() {
         var response = customerService.getAll();
+
+        return ResponseEntity
+                .ok()
+                .body(response);
+    }
+
+    @GetMapping("/customer/{id}/comments")
+    public ResponseEntity<List<ProductCommentDtoResponse>> retrieveCustomerComments(@PathVariable final Integer id) {
+        var response = customerService.getAllComments(id);
 
         return ResponseEntity
                 .ok()
