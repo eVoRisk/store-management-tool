@@ -17,6 +17,7 @@ ext {
     jakarta_validation = '3.0.2'
     apache_commons_version = '3.14.0'
     redisson_version = '3.25.0'
+    archunit_version = '1.2.1'
 }
 
 jar {
@@ -44,6 +45,8 @@ dependencies {
     implementation "jakarta.validation:jakarta.validation-api:$jakarta_validation"
     implementation "org.apache.commons:commons-lang3:$apache_commons_version"
     implementation "org.redisson:redisson:$redisson_version"
+    implementation "com.tngtech.archunit:archunit:$archunit_version"
+
 
     compileOnly "org.projectlombok:lombok:$lombok_version"
     annotationProcessor "org.projectlombok:lombok:$lombok_version"

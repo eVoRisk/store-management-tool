@@ -1,6 +1,7 @@
 package com.store.management.tool.service;
 
-import com.store.management.tool.dto.ProductDto;
+import com.store.management.tool.dto.request.ProductDtoRequest;
+import com.store.management.tool.dto.response.ProductDtoResponse;
 import com.store.management.tool.exception.NotFoundException;
 import com.store.management.tool.model.Product;
 import com.store.management.tool.repository.ProductRepository;
@@ -21,25 +22,28 @@ public class ProductServiceImpl implements ProductService {
     private final ModelMapper modelMapper;
 
     @Override
-    public ProductDto add(ProductDto productDto) {
-        productRepository.save(modelMapper.map(productDto, Product.class));
+    public ProductDtoResponse add(ProductDtoRequest productDto) {
+        var product = productRepository.save(modelMapper.map(productDto, Product.class));
 
-        return productDto;
+        return modelMapper.map(product, ProductDtoResponse.class);
     }
 
     @Override
-    public Product getById(Integer id) {
-        return productRepository.findById(id)
+    public ProductDtoResponse getById(Integer id) {
+        var product = productRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(format("Product with id: %s not found", id)));
+
+        return modelMapper.map(product, ProductDtoResponse.class);
     }
 
     @Override
-    public List<Product> getAll() {
-        return productRepository.findAll();
+    public List<ProductDtoResponse> getAll() {
+        return productRepository.findAll().stream()
+                .map(product -> modelMapper.map(product, ProductDtoResponse.class)).toList();
     }
 
     @Override
-    public void update(ProductDto productDto, Integer id) {
+    public void update(ProductDtoRequest productDto, Integer id) {
         Optional<Product> product = productRepository.findById(id);
         product.ifPresent(value -> modelMapper.map(productDto, value));
 

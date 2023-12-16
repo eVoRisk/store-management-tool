@@ -1,6 +1,6 @@
 package com.store.management.tool.service;
 
-import com.store.management.tool.model.fakestore.Product;
+import com.store.management.tool.dto.fakestore.ProductDto;
 import com.store.management.tool.observer.logging.ProcessingLoggerProvider;
 import com.store.management.tool.service.client.FakeStoreClient;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class FakeStoreServiceImpl implements FakeStoreService {
     }
 
     @Override
-    public List<Product> products() {
+    public List<ProductDto> products() {
         return executeWithObserver(this::doProducts,
                 loggerProvider::productLogger, null);
     }
@@ -34,11 +34,11 @@ public class FakeStoreServiceImpl implements FakeStoreService {
     }
 
     @Override
-    public List<Product> productsByCategory(String categoryName) {
+    public List<ProductDto> productsByCategory(String categoryName) {
         return fakeStoreClient.productsByCategory(categoryName);
     }
 
-    private List<Product> doProducts(final Object o) {
+    private List<ProductDto> doProducts(final Object o) {
         return fakeStoreClient.products();
     }
 

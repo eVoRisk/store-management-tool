@@ -1,7 +1,7 @@
 package com.store.management.tool.controller;
 
-import com.store.management.tool.dto.ProductDto;
-import com.store.management.tool.model.Product;
+import com.store.management.tool.dto.request.ProductDtoRequest;
+import com.store.management.tool.dto.response.ProductDtoResponse;
 import com.store.management.tool.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +18,8 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping("/product/add")
-    public ResponseEntity<ProductDto> addProduct(@RequestBody @Valid final ProductDto productDto) {
-        var response = productService.add(productDto);
+    public ResponseEntity<ProductDtoResponse> addProduct(@RequestBody @Valid final ProductDtoRequest productDtoRequest) {
+        var response = productService.add(productDtoRequest);
 
         return ResponseEntity
                 .ok()
@@ -27,7 +27,7 @@ public class ProductController {
     }
 
     @GetMapping("/product/{id}")
-    public ResponseEntity<Product> retrieveProductById(@PathVariable final Integer id) {
+    public ResponseEntity<ProductDtoResponse> retrieveProductById(@PathVariable final Integer id) {
         var response = productService.getById(id);
 
         return ResponseEntity
@@ -36,7 +36,7 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    public ResponseEntity<List<Product>> retrieveProducts() {
+    public ResponseEntity<List<ProductDtoResponse>> retrieveProducts() {
         var response = productService.getAll();
 
         return ResponseEntity
@@ -45,7 +45,7 @@ public class ProductController {
     }
 
     @PutMapping("/product/{id}")
-    public ResponseEntity<ProductDto> updateProduct(@RequestBody @Valid final ProductDto productDto, @PathVariable final Integer id) {
+    public ResponseEntity<ProductDtoRequest> updateProduct(@RequestBody @Valid final ProductDtoRequest productDto, @PathVariable final Integer id) {
         productService.update(productDto, id);
 
         return ResponseEntity

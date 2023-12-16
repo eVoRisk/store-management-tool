@@ -1,19 +1,19 @@
 package com.store.management.tool.service;
 
-import com.store.management.tool.dto.ProductDto;
-import com.store.management.tool.model.Product;
+import com.store.management.tool.dto.request.ProductDtoRequest;
+import com.store.management.tool.dto.response.ProductDtoResponse;
 
 import java.util.List;
 
 public interface ProductService {
 
-    ProductDto add(ProductDto productDto);
+    ProductDtoResponse add(ProductDtoRequest productDto);
 
-    Product getById(Integer id);
+    ProductDtoResponse getById(Integer id);
 
-    List<Product> getAll();
+    List<ProductDtoResponse> getAll();
 
-    void update(ProductDto productDto, Integer id);
+    void update(ProductDtoRequest productDto, Integer id);
 
     void deleteById(Integer id);
 }

@@ -1,18 +1,18 @@
 package com.store.management.tool.service;
 
-import com.store.management.tool.dto.CategoryDto;
-import com.store.management.tool.model.Category;
+import com.store.management.tool.dto.request.CategoryDtoRequest;
+import com.store.management.tool.dto.response.CategoryDtoResponse;
 
 import java.util.List;
 
 public interface CategoryService {
-    CategoryDto add(CategoryDto categoryDto);
+    CategoryDtoResponse add(CategoryDtoRequest categoryDtoRequest);
 
-    Category getById(Integer id);
+    CategoryDtoResponse getById(Integer id);
 
-    List<Category> getAll();
+    List<CategoryDtoResponse> getAll();
 
-    void update(CategoryDto categoryDto, Integer id);
+    void update(CategoryDtoRequest categoryDtoRequest, Integer id);
 
     void deleteById(Integer id);
 }

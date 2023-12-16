@@ -1,4 +1,4 @@
-package com.store.management.tool.dto;
+package com.store.management.tool.dto.request;
 
 import com.store.management.tool.validation.Required;
 import jakarta.validation.constraints.Positive;
@@ -13,7 +13,7 @@ import static com.store.management.tool.exception.ErrorCode.*;
 @Getter
 @Builder(setterPrefix = "with")
 @Jacksonized
-public class ProductDto {
+public class ProductDtoRequest {
 
     @Required(errorCode = MISSING_PRODUCT_NAME)
     private String name;
@@ -30,5 +30,5 @@ public class ProductDto {
     private Integer stock;
 
     @Required(errorCode = MISSING_PRODUCT_CATEGORY)
-    private CategoryDto category;
+    private CategoryDtoRequest category;
 }

@@ -1,6 +1,6 @@
 package com.store.management.tool.service.client;
 
-import com.store.management.tool.model.fakestore.Product;
+import com.store.management.tool.dto.fakestore.ProductDto;
 import org.springframework.stereotype.Service;
 import retrofit2.Response;
 
@@ -16,8 +16,8 @@ public class FakeStoreClientImpl implements FakeStoreClient {
     }
 
     @Override
-    public List<Product> products() {
-        Response<List<Product>> response = fakeStoreApi.products();
+    public List<ProductDto> products() {
+        Response<List<ProductDto>> response = fakeStoreApi.products();
 
         return response.body();
     }
@@ -30,8 +30,8 @@ public class FakeStoreClientImpl implements FakeStoreClient {
     }
 
     @Override
-    public List<Product> productsByCategory(String categoryName) {
-        Response<List<Product>> response = fakeStoreApi.productsByCategory(categoryName);
+    public List<ProductDto> productsByCategory(String categoryName) {
+        Response<List<ProductDto>> response = fakeStoreApi.productsByCategory(categoryName);
 
         return response.body();
     }

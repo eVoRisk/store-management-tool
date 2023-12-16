@@ -1,6 +1,6 @@
 package com.store.management.tool.controller;
 
-import com.store.management.tool.model.fakestore.Product;
+import com.store.management.tool.dto.fakestore.ProductDto;
 import com.store.management.tool.service.FakeStoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ public class FakeStoreController {
     private final FakeStoreService fakeStoreService;
 
     @GetMapping("fakestore/products")
-    public ResponseEntity<List<Product>> retrieveProducts() {
+    public ResponseEntity<List<ProductDto>> retrieveProducts() {
         var response = fakeStoreService.products();
 
         return ResponseEntity
@@ -38,7 +38,7 @@ public class FakeStoreController {
     }
 
     @GetMapping("fakestore/products/category/{categoryName}")
-    public ResponseEntity<List<Product>> retrieveProductsByCategory(@PathVariable("categoryName") final String categoryName) {
+    public ResponseEntity<List<ProductDto>> retrieveProductsByCategory(@PathVariable("categoryName") final String categoryName) {
         var response = fakeStoreService.productsByCategory(categoryName);
 
         return ResponseEntity

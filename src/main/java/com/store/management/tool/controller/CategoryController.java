@@ -1,8 +1,9 @@
 package com.store.management.tool.controller;
 
-import com.store.management.tool.dto.CategoryDto;
-import com.store.management.tool.model.Category;
+import com.store.management.tool.dto.request.CategoryDtoRequest;
+import com.store.management.tool.dto.response.CategoryDtoResponse;
 import com.store.management.tool.service.CategoryService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +18,8 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @PostMapping("/category/add")
-    public ResponseEntity<CategoryDto> addCategory(@RequestBody final CategoryDto categoryDto) {
-        var response = categoryService.add(categoryDto);
+    public ResponseEntity<CategoryDtoResponse> addCategory(@RequestBody @Valid final CategoryDtoRequest categoryDtoRequest) {
+        var response = categoryService.add(categoryDtoRequest);
 
         return ResponseEntity
                 .ok()
@@ -26,7 +27,7 @@ public class CategoryController {
     }
 
     @GetMapping("/category/{id}")
-    public ResponseEntity<Category> retrieveCategoryById(@PathVariable final Integer id) {
+    public ResponseEntity<CategoryDtoResponse> retrieveCategoryById(@PathVariable final Integer id) {
         var response = categoryService.getById(id);
 
         return ResponseEntity
@@ -35,7 +36,7 @@ public class CategoryController {
     }
 
     @GetMapping("/categories")
-    public ResponseEntity<List<Category>> retrieveCategories() {
+    public ResponseEntity<List<CategoryDtoResponse>> retrieveCategories() {
         var response = categoryService.getAll();
 
         return ResponseEntity
@@ -44,12 +45,12 @@ public class CategoryController {
     }
 
     @PutMapping("/category/{id}")
-    public ResponseEntity<CategoryDto> updateCategory(@RequestBody final CategoryDto categoryDto, @PathVariable final Integer id) {
-        categoryService.update(categoryDto, id);
+    public ResponseEntity<CategoryDtoRequest> updateCategory(@RequestBody @Valid final CategoryDtoRequest categoryDtoRequest, @PathVariable final Integer id) {
+        categoryService.update(categoryDtoRequest, id);
 
         return ResponseEntity
                 .ok()
-                .body(categoryDto);
+                .body(categoryDtoRequest);
     }
 
     @DeleteMapping("category/{id}")
