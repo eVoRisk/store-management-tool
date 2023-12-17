@@ -8,7 +8,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import static com.store.management.tool.exception.ErrorCode.MALFORMED_INPUT;
+import static com.store.management.tool.exception.ErrorCode.INVALID_INPUT;
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.PARAMETER;
 
@@ -19,7 +19,7 @@ public @interface Required {
 
     String message() default "This field is required";
 
-    ErrorCode errorCode() default MALFORMED_INPUT;
+    ErrorCode errorCode() default INVALID_INPUT;
 
     Class<?>[] groups() default {};
 

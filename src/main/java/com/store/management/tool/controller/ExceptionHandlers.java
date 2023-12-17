@@ -31,11 +31,13 @@ public class ExceptionHandlers extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({StoreManagementToolException.class})
     private ResponseEntity<Object> handleStoreManagementToolException(final StoreManagementToolException e) {
+        LOGGER.error("Internal error: {} - {}", e.getMessage(), e.getErrorCode(), e);
         return new ResponseEntity<>(createFailureResponse(e), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler({Exception.class})
-    private ResponseEntity<Object> handleException() {
+    private ResponseEntity<Object> handleException(final Exception e) {
+        LOGGER.error("Internal error: {}", e.getMessage(), e);
         return new ResponseEntity<>(createFailureResponse(INTERNAL_ERROR), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -45,12 +47,13 @@ public class ExceptionHandlers extends ResponseEntityExceptionHandler {
                                                                   @NotNull final HttpHeaders headers,
                                                                   @NotNull final HttpStatusCode status,
                                                                   @NotNull final WebRequest request) {
+        LOGGER.warn("Invalid request received: {}", e.getMessage());
         var bindingResult = e.getBindingResult();
 
         if (bindingResult.getAllErrors().size() == 1) {
             ErrorCode code = ofNullable(bindingResult.getFieldError())
                     .flatMap(this::findErrorCodeFromFieldError)
-                    .orElse(MALFORMED_INPUT);
+                    .orElse(INVALID_INPUT);
 
             return new ResponseEntity<>(createFailureResponse(code), HttpStatus.BAD_REQUEST);
         }
