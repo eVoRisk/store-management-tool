@@ -11,7 +11,9 @@ public enum ErrorCode {
 
     INTERNAL_ERROR("Internal error"),
 
-    MALFORMED_INPUT("Request body is malformed"),
+    INVALID_INPUT("Request body is invalid"),
+
+    PRODUCT_ALREADY_IN_CART("Product already in cart"),
 
     MISSING_MULTIPLE_FIELDS("Request body is missing multiple mandatory fields: %s"),
     MISSING_CATEGORY_NAME("No category name was submitted"),

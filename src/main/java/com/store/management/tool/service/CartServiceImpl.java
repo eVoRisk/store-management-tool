@@ -4,7 +4,7 @@ import com.store.management.tool.dto.request.CustomerDtoRequest;
 import com.store.management.tool.dto.response.CartDtoResponse;
 import com.store.management.tool.dto.response.ProductDtoResponse;
 import com.store.management.tool.exception.NotFoundException;
-import com.store.management.tool.exception.ProductAlreadyInCartException;
+import com.store.management.tool.exception.StoreManagementToolException;
 import com.store.management.tool.model.Cart;
 import com.store.management.tool.model.CartItem;
 import com.store.management.tool.repository.CartItemRepository;
@@ -17,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import static com.store.management.tool.exception.ErrorCode.PRODUCT_ALREADY_IN_CART;
 import static java.lang.String.format;
 
 @RequiredArgsConstructor
@@ -54,8 +55,8 @@ public class CartServiceImpl implements CartService {
 
         cartItemRepository.findCartItemByCartIdAndProductId(cartId, productId)
                 .ifPresent(c -> {
-                    throw new ProductAlreadyInCartException("Product already in cart");
-                }); // TODO - refactor exception handling
+                    throw new StoreManagementToolException(PRODUCT_ALREADY_IN_CART);
+                });
 
         var cartItem = new CartItem();
         cartItem.setCart(cart);
