@@ -1,7 +1,5 @@
 package com.store.management.tool.dto.response;
 
-import com.store.management.tool.model.Customer;
-import com.store.management.tool.model.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +14,6 @@ import java.util.List;
 public class CartDtoResponse {
 
     private Integer id;
-    private Customer customer;
+    private CustomerDtoResponse customer;
     private List<ProductDtoResponse> products;
 }
